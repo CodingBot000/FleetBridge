@@ -1,0 +1,588 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		57D4C67E30A0E3ED003A3BF2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 57D4C65F30A0E3EB003A3BF2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 57D4C66630A0E3EB003A3BF2;
+			remoteInfo = FleetBridgeHost;
+		};
+		57D4C68830A0E3ED003A3BF2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 57D4C65F30A0E3EB003A3BF2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 57D4C66630A0E3EB003A3BF2;
+			remoteInfo = FleetBridgeHost;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		57D4C66730A0E3EB003A3BF2 /* FleetBridgeHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FleetBridgeHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		57D4C67D30A0E3ED003A3BF2 /* FleetBridgeHostTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FleetBridgeHostTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		57D4C68730A0E3ED003A3BF2 /* FleetBridgeHostUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FleetBridgeHostUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		57D4C68F30A0E3ED003A3BF2 /* Exceptions for "FleetBridgeHost" folder in "FleetBridgeHost" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 57D4C66630A0E3EB003A3BF2 /* FleetBridgeHost */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		57D4C66930A0E3EB003A3BF2 /* FleetBridgeHost */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				57D4C68F30A0E3ED003A3BF2 /* Exceptions for "FleetBridgeHost" folder in "FleetBridgeHost" target */,
+			);
+			path = FleetBridgeHost;
+			sourceTree = "<group>";
+		};
+		57D4C68030A0E3ED003A3BF2 /* FleetBridgeHostTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = FleetBridgeHostTests;
+			sourceTree = "<group>";
+		};
+		57D4C68A30A0E3ED003A3BF2 /* FleetBridgeHostUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = FleetBridgeHostUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		57D4C66430A0E3EB003A3BF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57D4C67A30A0E3ED003A3BF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57D4C68430A0E3ED003A3BF2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		57D4C65E30A0E3EB003A3BF2 = {
+			isa = PBXGroup;
+			children = (
+				57D4C66930A0E3EB003A3BF2 /* FleetBridgeHost */,
+				57D4C68030A0E3ED003A3BF2 /* FleetBridgeHostTests */,
+				57D4C68A30A0E3ED003A3BF2 /* FleetBridgeHostUITests */,
+				57D4C66830A0E3EB003A3BF2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		57D4C66830A0E3EB003A3BF2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				57D4C66730A0E3EB003A3BF2 /* FleetBridgeHost.app */,
+				57D4C67D30A0E3ED003A3BF2 /* FleetBridgeHostTests.xctest */,
+				57D4C68730A0E3ED003A3BF2 /* FleetBridgeHostUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		57D4C66630A0E3EB003A3BF2 /* FleetBridgeHost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57D4C69030A0E3ED003A3BF2 /* Build configuration list for PBXNativeTarget "FleetBridgeHost" */;
+			buildPhases = (
+				57D4C66330A0E3EB003A3BF2 /* Sources */,
+				57D4C66430A0E3EB003A3BF2 /* Frameworks */,
+				57D4C66530A0E3EB003A3BF2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				57D4C66930A0E3EB003A3BF2 /* FleetBridgeHost */,
+			);
+			name = FleetBridgeHost;
+			packageProductDependencies = (
+			);
+			productName = FleetBridgeHost;
+			productReference = 57D4C66730A0E3EB003A3BF2 /* FleetBridgeHost.app */;
+			productType = "com.apple.product-type.application";
+		};
+		57D4C67C30A0E3ED003A3BF2 /* FleetBridgeHostTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57D4C69530A0E3ED003A3BF2 /* Build configuration list for PBXNativeTarget "FleetBridgeHostTests" */;
+			buildPhases = (
+				57D4C67930A0E3ED003A3BF2 /* Sources */,
+				57D4C67A30A0E3ED003A3BF2 /* Frameworks */,
+				57D4C67B30A0E3ED003A3BF2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				57D4C67F30A0E3ED003A3BF2 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				57D4C68030A0E3ED003A3BF2 /* FleetBridgeHostTests */,
+			);
+			name = FleetBridgeHostTests;
+			packageProductDependencies = (
+			);
+			productName = FleetBridgeHostTests;
+			productReference = 57D4C67D30A0E3ED003A3BF2 /* FleetBridgeHostTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		57D4C68630A0E3ED003A3BF2 /* FleetBridgeHostUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57D4C69830A0E3ED003A3BF2 /* Build configuration list for PBXNativeTarget "FleetBridgeHostUITests" */;
+			buildPhases = (
+				57D4C68330A0E3ED003A3BF2 /* Sources */,
+				57D4C68430A0E3ED003A3BF2 /* Frameworks */,
+				57D4C68530A0E3ED003A3BF2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				57D4C68930A0E3ED003A3BF2 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				57D4C68A30A0E3ED003A3BF2 /* FleetBridgeHostUITests */,
+			);
+			name = FleetBridgeHostUITests;
+			packageProductDependencies = (
+			);
+			productName = FleetBridgeHostUITests;
+			productReference = 57D4C68730A0E3ED003A3BF2 /* FleetBridgeHostUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		57D4C65F30A0E3EB003A3BF2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					57D4C66630A0E3EB003A3BF2 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					57D4C67C30A0E3ED003A3BF2 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 57D4C66630A0E3EB003A3BF2;
+					};
+					57D4C68630A0E3ED003A3BF2 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = 57D4C66630A0E3EB003A3BF2;
+					};
+				};
+			};
+			buildConfigurationList = 57D4C66230A0E3EB003A3BF2 /* Build configuration list for PBXProject "FleetBridgeHost" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 57D4C65E30A0E3EB003A3BF2;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 57D4C66830A0E3EB003A3BF2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				57D4C66630A0E3EB003A3BF2 /* FleetBridgeHost */,
+				57D4C67C30A0E3ED003A3BF2 /* FleetBridgeHostTests */,
+				57D4C68630A0E3ED003A3BF2 /* FleetBridgeHostUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		57D4C66530A0E3EB003A3BF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57D4C67B30A0E3ED003A3BF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57D4C68530A0E3ED003A3BF2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		57D4C66330A0E3EB003A3BF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57D4C67930A0E3ED003A3BF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		57D4C68330A0E3ED003A3BF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		57D4C67F30A0E3ED003A3BF2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 57D4C66630A0E3EB003A3BF2 /* FleetBridgeHost */;
+			targetProxy = 57D4C67E30A0E3ED003A3BF2 /* PBXContainerItemProxy */;
+		};
+		57D4C68930A0E3ED003A3BF2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 57D4C66630A0E3EB003A3BF2 /* FleetBridgeHost */;
+			targetProxy = 57D4C68830A0E3ED003A3BF2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		57D4C69130A0E3ED003A3BF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FleetBridgeHost/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.fleetbridge.FleetBridgeHost;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		57D4C69230A0E3ED003A3BF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FleetBridgeHost/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.fleetbridge.FleetBridgeHost;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		57D4C69330A0E3ED003A3BF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		57D4C69430A0E3ED003A3BF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		57D4C69630A0E3ED003A3BF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.fleetbridge.FleetBridgeHostTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FleetBridgeHost.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FleetBridgeHost";
+			};
+			name = Debug;
+		};
+		57D4C69730A0E3ED003A3BF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.fleetbridge.FleetBridgeHostTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FleetBridgeHost.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FleetBridgeHost";
+			};
+			name = Release;
+		};
+		57D4C69930A0E3ED003A3BF2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.fleetbridge.FleetBridgeHostUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FleetBridgeHost;
+			};
+			name = Debug;
+		};
+		57D4C69A30A0E3ED003A3BF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.fleetbridge.FleetBridgeHostUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FleetBridgeHost;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		57D4C66230A0E3EB003A3BF2 /* Build configuration list for PBXProject "FleetBridgeHost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57D4C69330A0E3ED003A3BF2 /* Debug */,
+				57D4C69430A0E3ED003A3BF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		57D4C69030A0E3ED003A3BF2 /* Build configuration list for PBXNativeTarget "FleetBridgeHost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57D4C69130A0E3ED003A3BF2 /* Debug */,
+				57D4C69230A0E3ED003A3BF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		57D4C69530A0E3ED003A3BF2 /* Build configuration list for PBXNativeTarget "FleetBridgeHostTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57D4C69630A0E3ED003A3BF2 /* Debug */,
+				57D4C69730A0E3ED003A3BF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		57D4C69830A0E3ED003A3BF2 /* Build configuration list for PBXNativeTarget "FleetBridgeHostUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57D4C69930A0E3ED003A3BF2 /* Debug */,
+				57D4C69A30A0E3ED003A3BF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 57D4C65F30A0E3EB003A3BF2 /* Project object */;
+}
