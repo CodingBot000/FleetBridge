@@ -30,4 +30,18 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('차량 정보를 불러올 수 없습니다.'), findsOneWidget);
   });
+  testWidgets('retries a request until the native handler is registered', (tester) async {
+    var calls = 0;
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, (call) async {
+      calls++;
+      if (calls == 1) throw MissingPluginException();
+      return {'name': '차량 1', 'model': 'Model 1'};
+    });
+    await tester.pumpWidget(const ProviderScope(child: MaterialApp(home: VehicleDetail(id: 'vehicle-1'))));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 110));
+    await tester.pumpAndSettle();
+    expect(calls, 2);
+    expect(find.text('Model 1'), findsOneWidget);
+  });
 }

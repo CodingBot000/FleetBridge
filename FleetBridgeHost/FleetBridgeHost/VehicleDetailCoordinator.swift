@@ -5,6 +5,7 @@ import UIKit
 final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationControllerDelegate {
     private let repository: VehicleRepository
     private var engine: FlutterEngine?
+    private var isClosing = false
     private var channel: FlutterMethodChannel?
     private weak var controller: FlutterViewController?
 
@@ -38,8 +39,11 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
                 }
                 result(["id": vehicle.id, "name": vehicle.name, "model": vehicle.model])
             case "close":
+                guard !self.isClosing else { result(nil); return }
+                self.isClosing = true
                 result(nil)
-                self.controller?.dismiss(animated: true) { [weak self] in self?.tearDown() }
+                guard let controller = self.controller else { self.tearDown(); return }
+                controller.dismiss(animated: true) { [weak self] in self?.tearDown() }
             default: result(FlutterMethodNotImplemented)
             }
         }
@@ -58,6 +62,7 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
         controller = nil
         engine?.destroyContext()
         engine = nil
+        isClosing = false
     }
     deinit { tearDown() }
 }

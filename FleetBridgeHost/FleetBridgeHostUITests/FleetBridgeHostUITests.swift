@@ -55,4 +55,16 @@ final class FleetBridgeHostUITests: XCTestCase {
         }
         XCTAssertTrue(app.cells["vehicle-1"].waitForExistence(timeout: 10))
     }
+    @MainActor
+    func testInvalidVehicleShowsErrorAndReturnsToList() {
+        let app = XCUIApplication()
+        app.launchArguments.append("-ui-test-invalid-vehicle")
+        app.launch()
+        let cell = app.cells["vehicle-1"]
+        XCTAssertTrue(cell.waitForExistence(timeout: 15))
+        cell.tap()
+        XCTAssertTrue(app.staticTexts["차량 정보를 불러올 수 없습니다."].waitForExistence(timeout: 20), app.debugDescription)
+        app.buttons["목록으로 돌아가기"].tap()
+        XCTAssertTrue(cell.waitForExistence(timeout: 10))
+    }
 }

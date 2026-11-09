@@ -3,13 +3,26 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const channel = MethodChannel('fleetbridge/vehicle');
+// The isolate can start before the host registers its handler. Retry only the
+// missing-handler startup race, with a bounded wait; real errors are surfaced.
+Future<Map<String, dynamic>?> fetchVehicle(String id) async {
+  for (var attempt = 0; ; attempt++) {
+    try {
+      return await channel.invokeMapMethod<String, dynamic>('getVehicle', {'id': id});
+    } on MissingPluginException {
+      if (attempt >= 19) rethrow;
+      await Future<void>.delayed(const Duration(milliseconds: 100));
+    }
+  }
+}
+
 final vehicleProvider = FutureProvider.family<Map<String, dynamic>, String>((ref, id) async {
-  final data = await channel.invokeMapMethod<String, dynamic>('getVehicle', {'id': id});
+  final data = await fetchVehicle(id);
   if (data == null || data['name'] is! String || data['model'] is! String) {
     throw StateError('차량 정보를 찾을 수 없습니다.');
   }
   return data;
-});
+}, retry: (retryCount, error) => null);
 
 void main() => runApp(const ProviderScope(child: FleetApp()));
 

@@ -41,6 +41,11 @@ final class ViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vehicle = repository.vehicles[indexPath.row]
-        detailCoordinator.present(id: vehicle.id, from: self)
+        #if DEBUG
+        let id = ProcessInfo.processInfo.arguments.contains("-ui-test-invalid-vehicle") ? "invalid-vehicle" : vehicle.id
+        #else
+        let id = vehicle.id
+        #endif
+        detailCoordinator.present(id: id, from: self)
     }
 }
