@@ -36,3 +36,15 @@ final class FleetBridgeHostTests: XCTestCase {
     }
 
 }
+
+final class VehicleRepositoryTests: XCTestCase {
+    func testMockVehiclesHaveUniqueIDsAndCanBeLookedUp() {
+        let repository = VehicleRepository()
+        XCTAssertEqual(repository.vehicles.count, 10)
+        XCTAssertEqual(Set(repository.vehicles.map(\.id)).count, 10)
+        for vehicle in repository.vehicles {
+            XCTAssertEqual(repository.vehicle(id: vehicle.id), vehicle)
+        }
+        XCTAssertNil(repository.vehicle(id: "missing"))
+    }
+}
