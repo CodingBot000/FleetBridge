@@ -1,6 +1,6 @@
 # FleetBridge 작업 규칙
 
-- Phase 1 범위와 검증 기준은 `docs/specs/phase1.md`를 따른다.
+- 현재 기능과 책임은 `README.md` 및 `docs/architecture.md`, 검증 근거는 `docs/verification.md`를 확인한다. `docs/specs/`의 Phase 문서는 적용 시점이 명시된 역사적 계약으로 구분한다.
 - 시크릿, 빌드 산출물과 생성 캐시를 커밋하지 않는다.
 - 테스트 결과와 미검증 항목을 구분해 기록한다.
 - 모든 공개 문서, SDD, PR 설명 및 커밋 메시지는 범용 오픈소스 기술 포트폴리오 관점에서 작성하며 특정 채용사나 채용·입사 목적을 언급하지 않는다.
