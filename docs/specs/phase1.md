@@ -1,9 +1,11 @@
-# Phase 1 기능 계약
+# Phase 1 기능 계약 — 단계 종료 기록
+
+적용 시점: Phase 1 최종 보강 `4d23ed9` / [PR #1](https://github.com/CodingBot000/FleetBridge/pull/1). 아래 범위는 당시 계약이며 현재 전체 기능 목록이 아닙니다. 지도와 관제 시뮬레이션은 이후 Phase 2에서 추가됐습니다. 현재 구현은 [README](../../README.md)와 [설계 문서](../architecture.md)를 참고하세요.
 
 ## 목표와 범위
 UIKit 차량 목록의 모의 차량 10대에서 Flutter 차량 상세로 이동하고 네이티브로 돌아온다. 실제 차량 제어, 서버, 지도, 인증은 범위 밖이다.
 
-## 현재 상태
+## Phase 1 종료 당시 환경
 Xcode 26.6, Flutter 3.47.9, UIKit과 Storyboard 기반 앱이며 앱·단위 테스트·UI 테스트 타깃이 있다. 기본 배포 대상은 iOS 18.0이다. iOS 18.6 Simulator에서 통합 검증한다.
 
 ## 설계 및 계약
@@ -24,5 +26,6 @@ Xcode 26.6, Flutter 3.47.9, UIKit과 Storyboard 기반 앱이며 앱·단위 테
 
 패키지 산출물은 Git에 포함하지 않는다. 새 환경에서는 Flutter SDK 3.47.9를 준비한 후 `fleetbridge_detail`에서 `flutter pub get` 및 `flutter build swift-package --platform ios --no-codesign`을 실행해 `build/ios/SwiftPackages`를 생성해야 Xcode가 패키지를 찾는다. 서명 없는 산출물은 시뮬레이터 검증용이며 실기기 배포 서명은 별도로 확인해야 한다.
 
-## 검증 상태
-Xcode 26.6 / iOS 18.6 Simulator에서 전체 테스트 8개가 통과했다. 이 실행에는 잘못된 ID의 실제 MethodChannel 오류 및 복귀와 차량 1·2의 20회 왕복이 포함된다. Flutter 위젯 테스트 4개와 정적 분석도 통과했다. 별도 클론에서 초기화 스크립트와 시뮬레이터 클린 빌드를 확인했다. 메모리 누수 프로파일링과 실제 iOS 18.0 기기 검증은 수행하지 않았다.
+## 검증 기록
+
+당시 결과는 [단계별 검증 표](../verification.md)에 보존합니다. 이후 단계에서 늘어난 테스트 수치를 이 문서의 현재 값처럼 덮어쓰지 않습니다.

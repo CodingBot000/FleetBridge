@@ -1,4 +1,6 @@
-# Phase 2 FMS MVP
+# Phase 2 FMS MVP — 단계 종료 기록
+
+적용 시점: 기능 구현 `11b69c8` 및 지도 정책 보완 `b9ec56e` / [PR #3](https://github.com/CodingBot000/FleetBridge/pull/3). 이후 Phase 3의 계측·백그라운드 처리와 문서 보완은 포함하지 않는 당시 계약입니다. 현재 책임과 통신 흐름은 [설계 문서](../architecture.md), 실행 근거는 [검증 결과](../verification.md)를 참고하세요.
 
 Native `VehicleRepository`를 모의 차량의 단일 원본으로 사용한다. 위치·상태·배터리·갱신 시각은 시뮬레이션 데이터이며 실제 차량이나 네트워크 연결 상태가 아니다. 상세 화면은 선택된 ID로 원본을 조회한다. 지도는 OpenStreetMap 공개 타일의 이용 정책을 준수하고 표시되는 뷰포트만 요청한다. 냉동기 제어는 실제 장치와 연결되지 않는 명령 시뮬레이션이다.
 
