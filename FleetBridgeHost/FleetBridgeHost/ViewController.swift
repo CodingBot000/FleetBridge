@@ -3,6 +3,7 @@ import UIKit
 final class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let repository = VehicleRepository()
     private lazy var detailCoordinator = VehicleDetailCoordinator(repository: repository)
+    private var lifecycleObservers: [NSObjectProtocol] = []
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
 
     override func viewDidLoad() {
@@ -10,6 +11,11 @@ final class ViewController: UIViewController, UITableViewDataSource, UITableView
         title = "차량 목록"
         repository.onChange = { [weak self] in self?.tableView.reloadData() }
         repository.start()
+        let center = NotificationCenter.default
+        lifecycleObservers = [
+            center.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { [weak self] _ in self?.repository.stop() },
+            center.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self] _ in self?.repository.start() }
+        ]
         view.backgroundColor = .systemBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
@@ -22,6 +28,11 @@ final class ViewController: UIViewController, UITableViewDataSource, UITableView
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+    }
+
+    deinit {
+        lifecycleObservers.forEach { NotificationCenter.default.removeObserver($0) }
+        repository.stop()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -70,4 +70,60 @@ final class FleetBridgeHostUITests: XCTestCase {
         app.buttons["목록으로 돌아가기"].tap()
         XCTAssertTrue(cell.waitForExistence(timeout: 10))
     }
+    @MainActor
+    func testBackgroundAndReturnToDetail() {
+        let app = XCUIApplication()
+        app.launchEnvironment["FLEETBRIDGE_UI_TEST"] = "1"
+        app.launch()
+        let cell = app.cells["vehicle-1"]
+        XCTAssertTrue(cell.waitForExistence(timeout: 15))
+        cell.tap()
+        XCTAssertTrue(app.staticTexts["vehicle-1"].waitForExistence(timeout: 20))
+        XCUIDevice.shared.press(.home)
+        app.activate()
+        XCTAssertTrue(app.staticTexts["vehicle-1"].waitForExistence(timeout: 20))
+        app.buttons["목록으로 돌아가기"].tap()
+        XCTAssertTrue(cell.waitForExistence(timeout: 10))
+    }
+    @MainActor
+    func testLateCommandAfterCloseDoesNotAffectNextDetail() {
+        let app = XCUIApplication()
+        app.launchEnvironment["FLEETBRIDGE_UI_TEST"] = "1"
+        app.launch()
+        let first = app.cells["vehicle-1"]
+        XCTAssertTrue(first.waitForExistence(timeout: 15))
+        first.tap()
+        XCTAssertTrue(app.staticTexts["vehicle-1"].waitForExistence(timeout: 20))
+        let scenario = app.buttons["성공 시나리오"]
+        if !scenario.isHittable { app.swipeUp() }
+        scenario.tap()
+        app.buttons["시간 초과 시나리오"].tap()
+        let command = app.buttons["냉동기 전환"]
+        command.tap()
+        XCTAssertTrue(app.buttons["처리 중…"].waitForExistence(timeout: 5))
+        app.buttons["목록으로 돌아가기"].tap()
+        let second = app.cells["vehicle-2"]
+        XCTAssertTrue(second.waitForExistence(timeout: 15))
+        second.tap()
+        XCTAssertTrue(app.staticTexts["vehicle-2"].waitForExistence(timeout: 20))
+        XCTAssertFalse(app.staticTexts["응답 시간 초과"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["vehicle-2"].exists)
+        app.buttons["목록으로 돌아가기"].tap()
+    }
+    @MainActor
+    func testThirtyFirstFrames() {
+        let app = XCUIApplication()
+        app.launchEnvironment["FLEETBRIDGE_UI_TEST"] = "1"
+        app.launchEnvironment["FLEETBRIDGE_MEASURE"] = "1"
+        app.launch()
+        for index in 0..<30 {
+            let cell = app.cells["vehicle-\(index % 2 + 1)"]
+            XCTAssertTrue(cell.waitForExistence(timeout: 15))
+            cell.tap()
+            let metric = app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", "FLEET_FRAME_MS=")).firstMatch
+            XCTAssertTrue(metric.waitForExistence(timeout: 20))
+            print("FLEET_MEASUREMENT \(index) \(metric.label)")
+            app.buttons["목록으로 돌아가기"].tap()
+        }
+    }
 }
