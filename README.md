@@ -2,6 +2,15 @@
 
 FleetBridge는 기존 UIKit 기반 차량관리 애플리케이션에 Flutter를 단계적으로 통합하는 Add-to-App 엔지니어링 포트폴리오입니다. 네이티브와 크로스플랫폼 간 상태 동기화, 생명주기 관리, 성능 측정 및 회귀 검증을 다룹니다. 차량과 냉동기 제어는 모두 모의 데이터이며 실제 차량·서버와 연결되지 않습니다.
 
+## 마이그레이션 시리즈
+
+FleetBridge는 네이티브 앱의 단계적 Flutter 전환 과정을 두 개의 독립 저장소로 보존한 기술 사례입니다.
+
+- **Part 1 — [Native iOS + Flutter Add-to-App](https://github.com/CodingBot000/FleetBridge/releases/tag/v1.0-add-to-app)** (이 저장소): UIKit 기반 차량 목록과 Swift 데이터 저장소를 유지하면서 Flutter 상세 화면을 통합한 공존 구조
+- **Part 2 — [Full Flutter Migration](https://github.com/CodingBot000/FleetBridge-Flutter/releases/tag/v1.0-full-flutter)** ([소스 저장소](https://github.com/CodingBot000/FleetBridge-Flutter)): 동일한 주요 기능을 Flutter/Dart로 이전하고 iOS·Android 공통 동작을 검증한 독립 앱
+
+두 저장소는 별도의 Git 이력을 사용합니다. 두 번째 프로젝트의 [마이그레이션 비교 문서](https://github.com/CodingBot000/FleetBridge-Flutter/blob/v1.0-full-flutter/docs/migration.md)에 코드 역할과 기능 동등성·차이점을 기록했습니다.
+
 ## 주요 기능
 
 - UIKit 차량 목록의 운행·대기·오프라인 상태와 배터리 표시
