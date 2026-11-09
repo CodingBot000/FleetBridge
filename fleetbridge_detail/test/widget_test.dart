@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fleetbridge_detail/main.dart';
+import 'package:flutter_map/flutter_map.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -67,4 +68,13 @@ void main() {
       expect(find.text({'success': '명령 성공', 'failure': '명령 실패', 'timeout': '응답 시간 초과'}[outcome]!), findsOneWidget);
     });
   }
+  testWidgets('map test mode never creates network tile layer', (tester) async {
+    await tester.pumpWidget(const MaterialApp(home: Scaffold(body: VehicleDashboard(
+      id: 'vehicle-1', mapTestMode: true,
+      vehicle: {'name': '차량 1', 'model': 'Model 1', 'latitude': 37.5, 'longitude': 127.0},
+    ))));
+    await tester.pumpAndSettle();
+    expect(find.byType(FlutterMap), findsOneWidget);
+    expect(find.byType(TileLayer), findsNothing);
+  });
 }

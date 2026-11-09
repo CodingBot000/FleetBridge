@@ -21,6 +21,11 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
         var components = URLComponents()
         components.path = "/"
         components.queryItems = [URLQueryItem(name: "id", value: id)]
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["FLEETBRIDGE_UI_TEST"] == "1" {
+            components.queryItems?.append(URLQueryItem(name: "mapTestMode", value: "1"))
+        }
+        #endif
         guard engine.run(withEntrypoint: nil, initialRoute: components.string) else {
             tearDown()
             let alert = UIAlertController(title: "상세 화면 오류", message: "화면을 시작할 수 없습니다.", preferredStyle: .alert)
@@ -51,6 +56,9 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
                     guard let engine, self?.engine === engine else { return }
                     result(outcome)
                 }
+            case "openMapAttribution":
+                guard let url = URL(string: "https://www.openstreetmap.org/copyright") else { result(false); return }
+                UIApplication.shared.open(url) { result($0) }
             case "close":
                 guard !self.isClosing else { result(nil); return }
                 self.isClosing = true

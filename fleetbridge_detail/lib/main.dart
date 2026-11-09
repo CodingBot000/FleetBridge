@@ -99,9 +99,10 @@ class _VehicleDetailState extends ConsumerState<VehicleDetail> {
 }
 
 class VehicleDashboard extends StatefulWidget {
-  const VehicleDashboard({super.key, required this.vehicle, required this.id});
+  const VehicleDashboard({super.key, required this.vehicle, required this.id, this.mapTestMode = false});
   final Map<String, dynamic> vehicle;
   final String id;
+  final bool mapTestMode;
   @override
   State<VehicleDashboard> createState() => _VehicleDashboardState();
 }
@@ -110,6 +111,7 @@ class _VehicleDashboardState extends State<VehicleDashboard> {
   bool pending = false;
   String scenario = 'success';
   String? result;
+  bool mapLoadFailed = false;
   Future<void> sendCommand() async {
     if (pending) return;
     setState(() { pending = true; result = null; });
@@ -152,13 +154,25 @@ class _VehicleDashboardState extends State<VehicleDashboard> {
         SizedBox(height: 300, child: FlutterMap(
           options: MapOptions(initialCenter: LatLng(latitude.toDouble(), longitude.toDouble()), initialZoom: 13),
           children: [
-            TileLayer(urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-              userAgentPackageName: 'com.example.fleetbridge.FleetBridgeHost'),
+            if (!widget.mapTestMode && Uri.parse(WidgetsBinding.instance.platformDispatcher.defaultRouteName).queryParameters['mapTestMode'] != '1')
+              TileLayer(urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                tileProvider: NetworkTileProvider(headers: {
+                  'User-Agent': 'FleetBridgePortfolio/1.0 (+https://github.com/CodingBot000/FleetBridge)',
+                }),
+                errorTileCallback: (tile, error, stackTrace) {
+                  if (mounted && !mapLoadFailed) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      if (mounted && !mapLoadFailed) setState(() => mapLoadFailed = true);
+                    });
+                  }
+                }),
             MarkerLayer(markers: [Marker(point: LatLng(latitude.toDouble(), longitude.toDouble()),
               child: const Icon(Icons.location_on, color: Colors.red, size: 36))]),
-            const SimpleAttributionWidget(source: Text('OpenStreetMap contributors • osm.org/copyright')),
+            SimpleAttributionWidget(source: const Text('OpenStreetMap contributors'),
+              onTap: () => channel.invokeMethod<bool>('openMapAttribution')),
           ],
         )),
+      if (mapLoadFailed) const Text('지도를 불러올 수 없습니다. 네트워크 연결을 확인해 주세요.'),
       const SizedBox(height: 20),
       Text('냉동기 원격 명령 (시뮬레이션)', style: Theme.of(context).textTheme.titleMedium),
       const Text('실제 차량에는 명령이 전송되지 않습니다.'),
