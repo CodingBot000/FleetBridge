@@ -106,7 +106,8 @@ final class FleetBridgeHostUITests: XCTestCase {
         XCTAssertTrue(second.waitForExistence(timeout: 15))
         second.tap()
         XCTAssertTrue(app.staticTexts["vehicle-2"].waitForExistence(timeout: 20))
-        XCTAssertFalse(app.staticTexts["응답 시간 초과"].exists)
+        XCTAssertFalse(app.staticTexts["응답 시간 초과"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["vehicle-2"].exists)
         app.buttons["목록으로 돌아가기"].tap()
     }
     @MainActor
