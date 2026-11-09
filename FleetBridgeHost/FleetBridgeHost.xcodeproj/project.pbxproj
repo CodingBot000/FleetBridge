@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		056613EE67CF571EA639B0AE /* FlutterNativeIntegration in Frameworks */ = {isa = PBXBuildFile; productRef = BC875A84F3023C9EAB2A5DAA /* FlutterNativeIntegration */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		57D4C67E30A0E3ED003A3BF2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				056613EE67CF571EA639B0AE /* FlutterNativeIntegration in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,6 +120,7 @@
 				57D4C66330A0E3EB003A3BF2 /* Sources */,
 				57D4C66430A0E3EB003A3BF2 /* Frameworks */,
 				57D4C66530A0E3EB003A3BF2 /* Resources */,
+				13FF39FAD1E438F919FFB2F9 /* Flutter Assemble */,
 			);
 			buildRules = (
 			);
@@ -125,6 +131,7 @@
 			);
 			name = FleetBridgeHost;
 			packageProductDependencies = (
+				BC875A84F3023C9EAB2A5DAA /* FlutterNativeIntegration */,
 			);
 			productName = FleetBridgeHost;
 			productReference = 57D4C66730A0E3EB003A3BF2 /* FleetBridgeHost.app */;
@@ -147,8 +154,6 @@
 				57D4C68030A0E3ED003A3BF2 /* FleetBridgeHostTests */,
 			);
 			name = FleetBridgeHostTests;
-			packageProductDependencies = (
-			);
 			productName = FleetBridgeHostTests;
 			productReference = 57D4C67D30A0E3ED003A3BF2 /* FleetBridgeHostTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -170,8 +175,6 @@
 				57D4C68A30A0E3ED003A3BF2 /* FleetBridgeHostUITests */,
 			);
 			name = FleetBridgeHostUITests;
-			packageProductDependencies = (
-			);
 			productName = FleetBridgeHostUITests;
 			productReference = 57D4C68730A0E3ED003A3BF2 /* FleetBridgeHostUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -208,6 +211,9 @@
 			);
 			mainGroup = 57D4C65E30A0E3EB003A3BF2;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				0ED03056D20D60D3BD768752 /* XCLocalSwiftPackageReference "../fleetbridge_detail/build/ios/SwiftPackages/FlutterNativeIntegration" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 57D4C66830A0E3EB003A3BF2 /* Products */;
 			projectDirPath = "";
@@ -243,6 +249,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		13FF39FAD1E438F919FFB2F9 /* Flutter Assemble */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(FLUTTER_SWIFT_PACKAGE_OUTPUT)/Scripts/FlutterAssembleInputs.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "Flutter Assemble";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"$FLUTTER_SWIFT_PACKAGE_OUTPUT/Scripts/flutter_integration.sh\" assemble";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		57D4C66330A0E3EB003A3BF2 /* Sources */ = {
@@ -289,6 +318,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FLUTTER_APPLICATION_PATH = "$(SRCROOT)/../fleetbridge_detail";
+				FLUTTER_SWIFT_PACKAGE_OUTPUT = "$(SRCROOT)/../fleetbridge_detail/build/ios/SwiftPackages";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FleetBridgeHost/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -320,6 +352,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FLUTTER_APPLICATION_PATH = "$(SRCROOT)/../fleetbridge_detail";
+				FLUTTER_SWIFT_PACKAGE_OUTPUT = "$(SRCROOT)/../fleetbridge_detail/build/ios/SwiftPackages";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FleetBridgeHost/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -583,6 +618,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		0ED03056D20D60D3BD768752 /* XCLocalSwiftPackageReference "../fleetbridge_detail/build/ios/SwiftPackages/FlutterNativeIntegration" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../fleetbridge_detail/build/ios/SwiftPackages/FlutterNativeIntegration;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BC875A84F3023C9EAB2A5DAA /* FlutterNativeIntegration */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0ED03056D20D60D3BD768752 /* XCLocalSwiftPackageReference "../fleetbridge_detail/build/ios/SwiftPackages/FlutterNativeIntegration" */;
+			productName = FlutterNativeIntegration;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 57D4C65F30A0E3EB003A3BF2 /* Project object */;
 }

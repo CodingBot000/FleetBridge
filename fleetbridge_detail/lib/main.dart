@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 const channel = MethodChannel('fleetbridge/vehicle');
 final vehicleProvider = FutureProvider.family<Map<String, dynamic>, String>((ref, id) async {
   final data = await channel.invokeMapMethod<String, dynamic>('getVehicle', {'id': id});
-  if (data == null || data['name'] == null || data['model'] == null) {
+  if (data == null || data['name'] is! String || data['model'] is! String) {
     throw StateError('차량 정보를 찾을 수 없습니다.');
   }
   return data;
@@ -29,7 +29,7 @@ class VehicleDetail extends ConsumerWidget {
     final state = ref.watch(vehicleProvider(id));
     return Scaffold(
       appBar: AppBar(title: const Text('차량 상세'), leading: IconButton(
-        icon: const Icon(Icons.arrow_back), onPressed: () => channel.invokeMethod<void>('close'),
+        tooltip: '목록으로 돌아가기', icon: const Icon(Icons.arrow_back), onPressed: () => channel.invokeMethod<void>('close'),
       )),
       body: Center(child: state.when(
         loading: () => const CircularProgressIndicator(),

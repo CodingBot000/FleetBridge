@@ -22,4 +22,12 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('차량 정보를 불러올 수 없습니다.'), findsOneWidget);
   });
+  testWidgets('shows an error when native reports an invalid vehicle ID', (tester) async {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, (call) async {
+      throw PlatformException(code: 'not_found');
+    });
+    await tester.pumpWidget(const ProviderScope(child: MaterialApp(home: VehicleDetail(id: 'invalid'))));
+    await tester.pumpAndSettle();
+    expect(find.text('차량 정보를 불러올 수 없습니다.'), findsOneWidget);
+  });
 }

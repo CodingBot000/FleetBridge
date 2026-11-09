@@ -40,4 +40,19 @@ final class FleetBridgeHostUITests: XCTestCase {
             XCUIApplication().launch()
         }
     }
+    @MainActor
+    func testVehicleDetailSwitchesBetweenSelections() {
+        let app = XCUIApplication()
+        app.launch()
+        for iteration in 0..<20 {
+            let index = iteration % 2 + 1
+            let cell = app.cells["vehicle-\(index)"]
+            XCTAssertTrue(cell.waitForExistence(timeout: 15))
+            cell.tap()
+            XCTAssertTrue(app.staticTexts["Fleet Model \(index)"].waitForExistence(timeout: 20))
+            XCTAssertTrue(app.staticTexts["vehicle-\(index)"].exists)
+            app.buttons["목록으로 돌아가기"].tap()
+        }
+        XCTAssertTrue(app.cells["vehicle-1"].waitForExistence(timeout: 10))
+    }
 }

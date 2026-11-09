@@ -2,6 +2,7 @@ import UIKit
 
 final class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private let repository = VehicleRepository()
+    private lazy var detailCoordinator = VehicleDetailCoordinator(repository: repository)
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
 
     override func viewDidLoad() {
@@ -32,6 +33,7 @@ final class ViewController: UIViewController, UITableViewDataSource, UITableView
         content.text = vehicle.name
         content.secondaryText = vehicle.model
         cell.contentConfiguration = content
+        cell.accessibilityIdentifier = vehicle.id
         cell.accessoryType = .disclosureIndicator
         return cell
     }
@@ -39,8 +41,6 @@ final class ViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vehicle = repository.vehicles[indexPath.row]
-        let alert = UIAlertController(title: vehicle.name, message: "상세 화면 연결을 준비 중입니다.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "확인", style: .default))
-        present(alert, animated: true)
+        detailCoordinator.present(id: vehicle.id, from: self)
     }
 }

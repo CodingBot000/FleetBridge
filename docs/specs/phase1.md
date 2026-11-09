@@ -18,3 +18,8 @@ Xcode 26.6, UIKit과 Storyboard 기반 앱이며 앱·단위 테스트·UI 테�
 - 잘못된 ID, 데이터 누락, 오류 및 로딩을 단위·위젯 테스트로 확인한다.
 - iOS Simulator 빌드와 테스트, Flutter 테스트 및 양방향 내비게이션을 실행한다.
 - 구현하지 않거나 실행하지 못한 항목은 완료로 기록하지 않는다.
+
+## 상세 화면 생명주기
+상세 진입마다 `VehicleDetailCoordinator`가 새 `FlutterEngine`과 채널을 만들고 선택 ID를 초기 라우트에 전달한다. 닫기 요청 이후 채널 핸들러를 해제하고 엔진 컨텍스트를 파괴한다. 엔진을 재사용하지 않으므로 초기 라우트와 Riverpod 컨테이너가 다른 차량의 데이터와 섞이지 않는다. Flutter는 ID를 `getVehicle`에 전달하며 Native 저장소가 결과 또는 `not_found` 오류를 반환한다.
+
+패키지 산출물은 Git에 포함하지 않는다. 새 환경에서는 Flutter SDK 3.47.9를 준비한 후 `fleetbridge_detail`에서 `flutter pub get` 및 `flutter build swift-package --platform ios --no-codesign`을 실행해 `build/ios/SwiftPackages`를 생성해야 Xcode가 패키지를 찾는다. 서명 없는 산출물은 시뮬레이터 검증용이며 실기기 배포 서명은 별도로 확인해야 한다.
