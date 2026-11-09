@@ -8,6 +8,8 @@ final class ViewController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "차량 목록"
+        repository.onChange = { [weak self] in self?.tableView.reloadData() }
+        repository.start()
         view.backgroundColor = .systemBackground
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.dataSource = self
@@ -31,7 +33,8 @@ final class ViewController: UIViewController, UITableViewDataSource, UITableView
         let vehicle = repository.vehicles[indexPath.row]
         var content = cell.defaultContentConfiguration()
         content.text = vehicle.name
-        content.secondaryText = vehicle.model
+        let state = ["driving": "운행 중", "idle": "대기", "offline": "오프라인"][vehicle.status] ?? vehicle.status
+        content.secondaryText = "\(vehicle.model) · \(state) · 배터리 \(vehicle.battery)%"
         cell.contentConfiguration = content
         cell.accessibilityIdentifier = vehicle.id
         cell.accessoryType = .disclosureIndicator

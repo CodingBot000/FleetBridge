@@ -7,6 +7,7 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
     private var engine: FlutterEngine?
     private var isClosing = false
     private var channel: FlutterMethodChannel?
+    private var observer: NSObjectProtocol?
     private weak var controller: FlutterViewController?
 
     init(repository: VehicleRepository) {
@@ -20,6 +21,11 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
         var components = URLComponents()
         components.path = "/"
         components.queryItems = [URLQueryItem(name: "id", value: id)]
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["FLEETBRIDGE_UI_TEST"] == "1" {
+            components.queryItems?.append(URLQueryItem(name: "mapTestMode", value: "1"))
+        }
+        #endif
         guard engine.run(withEntrypoint: nil, initialRoute: components.string) else {
             tearDown()
             let alert = UIAlertController(title: "상세 화면 오류", message: "화면을 시작할 수 없습니다.", preferredStyle: .alert)
@@ -37,7 +43,22 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
                       let vehicle = self.repository.vehicle(id: id) else {
                     result(FlutterError(code: "not_found", message: "Vehicle not found", details: nil)); return
                 }
-                result(["id": vehicle.id, "name": vehicle.name, "model": vehicle.model])
+                result(vehicle.payload)
+            case "setRefrigeration":
+                guard let args = call.arguments as? [String: Any],
+                      let vehicleID = args["id"] as? String, vehicleID == id,
+                      let enabled = args["enabled"] as? Bool,
+                      let scenario = args["scenario"] as? String,
+                      ["success", "failure", "timeout"].contains(scenario) else {
+                    result(FlutterError(code: "invalid_command", message: nil, details: nil)); return
+                }
+                self.repository.setRefrigeration(id: vehicleID, enabled: enabled, scenario: scenario) { [weak self, weak engine] outcome in
+                    guard let engine, self?.engine === engine else { return }
+                    result(outcome)
+                }
+            case "openMapAttribution":
+                guard let url = URL(string: "https://www.openstreetmap.org/copyright") else { result(false); return }
+                UIApplication.shared.open(url) { result($0) }
             case "close":
                 guard !self.isClosing else { result(nil); return }
                 self.isClosing = true
@@ -46,6 +67,10 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
                 controller.dismiss(animated: true) { [weak self] in self?.tearDown() }
             default: result(FlutterMethodNotImplemented)
             }
+        }
+        observer = NotificationCenter.default.addObserver(forName: .vehicleRepositoryDidChange, object: repository, queue: .main) { [weak self] _ in
+            guard let self, let vehicle = self.repository.vehicle(id: id) else { return }
+            self.channel?.invokeMethod("vehicleUpdated", arguments: vehicle.payload)
         }
         let controller = FlutterViewController(engine: engine, nibName: nil, bundle: nil)
         self.controller = controller
@@ -57,6 +82,7 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) { tearDown() }
 
     private func tearDown() {
+        if let observer { NotificationCenter.default.removeObserver(observer); self.observer = nil }
         channel?.setMethodCallHandler(nil)
         channel = nil
         controller = nil

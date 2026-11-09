@@ -26,6 +26,7 @@ final class FleetBridgeHostUITests: XCTestCase {
     func testExample() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
+        app.launchEnvironment["FLEETBRIDGE_UI_TEST"] = "1"
         app.launch()
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -43,6 +44,7 @@ final class FleetBridgeHostUITests: XCTestCase {
     @MainActor
     func testVehicleDetailSwitchesBetweenSelections() {
         let app = XCUIApplication()
+        app.launchEnvironment["FLEETBRIDGE_UI_TEST"] = "1"
         app.launch()
         for iteration in 0..<20 {
             let index = iteration % 2 + 1
@@ -58,6 +60,7 @@ final class FleetBridgeHostUITests: XCTestCase {
     @MainActor
     func testInvalidVehicleShowsErrorAndReturnsToList() {
         let app = XCUIApplication()
+        app.launchEnvironment["FLEETBRIDGE_UI_TEST"] = "1"
         app.launchArguments.append("-ui-test-invalid-vehicle")
         app.launch()
         let cell = app.cells["vehicle-1"]
