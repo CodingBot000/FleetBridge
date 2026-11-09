@@ -16,6 +16,10 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
 
     func present(id: String, from presenter: UIViewController) {
         guard engine == nil else { return }
+        #if DEBUG
+        let startTime = CACurrentMediaTime()
+        var measuredFrameMs: Double?
+        #endif
         let engine = FlutterEngine(name: "vehicle-detail")
         self.engine = engine
         var components = URLComponents()
@@ -24,6 +28,9 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
         #if DEBUG
         if ProcessInfo.processInfo.environment["FLEETBRIDGE_UI_TEST"] == "1" {
             components.queryItems?.append(URLQueryItem(name: "mapTestMode", value: "1"))
+            if ProcessInfo.processInfo.environment["FLEETBRIDGE_MEASURE"] == "1" {
+                components.queryItems?.append(URLQueryItem(name: "measure", value: "1"))
+            }
         }
         #endif
         guard engine.run(withEntrypoint: nil, initialRoute: components.string) else {
@@ -56,6 +63,10 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
                     guard let engine, self?.engine === engine else { return }
                     result(outcome)
                 }
+            #if DEBUG
+            case "reportFirstFrame":
+                result(measuredFrameMs)
+            #endif
             case "openMapAttribution":
                 guard let url = URL(string: "https://www.openstreetmap.org/copyright") else { result(false); return }
                 UIApplication.shared.open(url) { result($0) }
@@ -74,6 +85,13 @@ final class VehicleDetailCoordinator: NSObject, UIAdaptivePresentationController
         }
         let controller = FlutterViewController(engine: engine, nibName: nil, bundle: nil)
         self.controller = controller
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["FLEETBRIDGE_MEASURE"] == "1" {
+            controller.setFlutterViewDidRenderCallback {
+                if measuredFrameMs == nil { measuredFrameMs = (CACurrentMediaTime() - startTime) * 1000 }
+            }
+        }
+        #endif
         controller.modalPresentationStyle = .fullScreen
         controller.presentationController?.delegate = self
         presenter.present(controller, animated: true)

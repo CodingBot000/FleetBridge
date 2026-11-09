@@ -66,6 +66,16 @@ final class VehicleSimulationTests: XCTestCase {
 }
 
 extension VehicleSimulationTests {
+    func testSimulatorStartStopIsIdempotent() {
+        let repository = VehicleRepository()
+        XCTAssertFalse(repository.isRunning)
+        repository.start()
+        repository.start()
+        XCTAssertTrue(repository.isRunning)
+        repository.stop()
+        repository.stop()
+        XCTAssertFalse(repository.isRunning)
+    }
     func testCommandSuccessAndDuplicateAreHandled() {
         let repository = VehicleRepository()
         let finished = expectation(description: "success")

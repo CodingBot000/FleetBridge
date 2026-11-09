@@ -56,24 +56,53 @@ class VehicleDetail extends ConsumerStatefulWidget {
   ConsumerState<VehicleDetail> createState() => _VehicleDetailState();
 }
 
-class _VehicleDetailState extends ConsumerState<VehicleDetail> {
+class _VehicleDetailState extends ConsumerState<VehicleDetail> with WidgetsBindingObserver {
   late final VehicleRevisionGate _revisionGate;
   Timer? _freshnessTimer;
+  double? _frameMs;
   @override
   void initState() {
     super.initState();
     _revisionGate = VehicleRevisionGate(widget.id);
-    _freshnessTimer = Timer.periodic(const Duration(seconds: 5), (_) {
-      if (mounted) setState(() {});
-    });
+    if (Uri.parse(WidgetsBinding.instance.platformDispatcher.defaultRouteName).queryParameters['measure'] == '1') {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        try {
+          double? value;
+          for (var i = 0; i < 40 && value == null && mounted; i++) {
+            try { value = await channel.invokeMethod<double>('reportFirstFrame'); }
+            on MissingPluginException { /* Native handler is still starting. */ }
+            if (value == null) await Future<void>.delayed(const Duration(milliseconds: 50));
+          }
+          if (mounted) setState(() => _frameMs = value);
+        } catch (_) { /* Measurement is optional. */ }
+      });
+    }
+    WidgetsBinding.instance.addObserver(this);
+    _startFreshnessTimer();
     channel.setMethodCallHandler((call) async {
       if (call.method != 'vehicleUpdated' || call.arguments is! Map) return;
       final data = call.arguments as Map;
       if (_revisionGate.accept(data)) ref.invalidate(vehicleProvider(widget.id));
     });
   }
+  void _startFreshnessTimer() {
+    _freshnessTimer ??= Timer.periodic(const Duration(seconds: 5), (_) {
+      if (mounted) setState(() {});
+    });
+  }
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      _startFreshnessTimer();
+      ref.invalidate(vehicleProvider(widget.id));
+    } else if (state == AppLifecycleState.paused || state == AppLifecycleState.detached) {
+      _freshnessTimer?.cancel();
+      _freshnessTimer = null;
+    }
+  }
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _freshnessTimer?.cancel();
     channel.setMethodCallHandler(null);
     super.dispose();
@@ -83,7 +112,7 @@ class _VehicleDetailState extends ConsumerState<VehicleDetail> {
     final id = widget.id;
     final state = ref.watch(vehicleProvider(id));
     return Scaffold(
-      appBar: AppBar(title: const Text('차량 상세'), leading: IconButton(
+      appBar: AppBar(title: _frameMs == null ? const Text('차량 상세') : Text('FLEET_FRAME_MS=${_frameMs!.toStringAsFixed(3)}'), leading: IconButton(
         tooltip: '목록으로 돌아가기', icon: const Icon(Icons.arrow_back), onPressed: () => channel.invokeMethod<void>('close'),
       )),
       body: Center(child: state.when(
@@ -99,15 +128,20 @@ class _VehicleDetailState extends ConsumerState<VehicleDetail> {
 }
 
 class VehicleDashboard extends StatefulWidget {
-  const VehicleDashboard({super.key, required this.vehicle, required this.id, this.mapTestMode = false});
+  const VehicleDashboard({super.key, required this.vehicle, required this.id, this.mapTestMode = false, this.tileProviderOverride});
   final Map<String, dynamic> vehicle;
   final String id;
   final bool mapTestMode;
+  final TileProvider? tileProviderOverride;
   @override
   State<VehicleDashboard> createState() => _VehicleDashboardState();
 }
 
 class _VehicleDashboardState extends State<VehicleDashboard> {
+  // TileLayer owns and disposes this provider; keep it stable across refreshes.
+  late final tileProvider = NetworkTileProvider(headers: {
+    'User-Agent': 'FleetBridgePortfolio/1.0 (+https://github.com/CodingBot000/FleetBridge)',
+  });
   bool pending = false;
   String scenario = 'success';
   String? result;
@@ -156,9 +190,7 @@ class _VehicleDashboardState extends State<VehicleDashboard> {
           children: [
             if (!widget.mapTestMode && Uri.parse(WidgetsBinding.instance.platformDispatcher.defaultRouteName).queryParameters['mapTestMode'] != '1')
               TileLayer(urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                tileProvider: NetworkTileProvider(headers: {
-                  'User-Agent': 'FleetBridgePortfolio/1.0 (+https://github.com/CodingBot000/FleetBridge)',
-                }),
+                tileProvider: widget.tileProviderOverride ?? tileProvider,
                 errorTileCallback: (tile, error, stackTrace) {
                   if (mounted && !mapLoadFailed) {
                     WidgetsBinding.instance.addPostFrameCallback((_) {

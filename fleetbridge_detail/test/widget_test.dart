@@ -5,6 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fleetbridge_detail/main.dart';
 import 'package:flutter_map/flutter_map.dart';
 
+class FailingTileProvider extends TileProvider {
+  @override
+  ImageProvider getImage(TileCoordinates coordinates, TileLayer options) => MemoryImage(Uint8List.fromList([1, 2, 3]));
+}
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
   test('ignores duplicate, older and unrelated updates', () {
@@ -76,5 +81,38 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(FlutterMap), findsOneWidget);
     expect(find.byType(TileLayer), findsNothing);
+  });
+  testWidgets('map tile failure displays a recoverable message without network', (tester) async {
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: VehicleDashboard(
+      id: 'vehicle-1', tileProviderOverride: FailingTileProvider(),
+      vehicle: const {'name': '차량 1', 'model': 'Model 1', 'latitude': 37.5, 'longitude': 127.0},
+    ))));
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+    expect(find.text('지도를 불러올 수 없습니다. 네트워크 연결을 확인해 주세요.'), findsOneWidget);
+  });
+  testWidgets('refreshes selected vehicle after app resumes', (tester) async {
+    var calls = 0;
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(channel, (call) async {
+      if (call.method == 'getVehicle') { calls++; return {'name': '차량 1', 'model': 'Model 1'}; }
+      return null;
+    });
+    await tester.pumpWidget(const ProviderScope(child: MaterialApp(home: VehicleDetail(id: 'vehicle-1'))));
+    await tester.pumpAndSettle();
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pumpAndSettle();
+    expect(calls, 2);
+  });
+  testWidgets('distinguishes stale data from simulated offline', (tester) async {
+    Widget dashboard(String status) => MaterialApp(home: Scaffold(body: VehicleDashboard(
+      id: 'vehicle-1', mapTestMode: true,
+      vehicle: {'name': '차량 1', 'model': 'Model 1', 'status': status, 'updatedAt': 1},
+    )));
+    await tester.pumpWidget(dashboard('driving'));
+    expect(find.text('갱신 지연'), findsOneWidget);
+    await tester.pumpWidget(dashboard('offline'));
+    expect(find.text('연결 끊김 (모의)'), findsOneWidget);
+    expect(find.text('갱신 지연'), findsNothing);
   });
 }

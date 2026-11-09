@@ -24,6 +24,7 @@ final class VehicleRepository: NSObject {
     private(set) var vehicles: [Vehicle]
     var onChange: (() -> Void)?
     private var timer: Timer?
+    var isRunning: Bool { timer != nil }
     private var pendingCommands: Set<String> = []
 
     init(vehicles: [Vehicle] = (1...10).map { index in
